@@ -34,13 +34,14 @@ const FaceBookPage = dynamic(
 export default function SideRight(props) {
   const {
     post, currentCategory, categories, latestPosts, tags,
-    currentTag, showCategory, showTag, rightAreaSlot, notice
+    currentTag, showCategory, showTag, rightAreaSlot, notice,
+    showNotice = true, showLatest = true, showInfoCard = true
   } = props
 
   const { locale } = useGlobal()
   return (
     <div id='sideRight' className={'space-y-4 lg:w-80 lg:pt-0 px-2 pt-4'}>
-      <InfoCard {...props} />
+      <InfoCard {...props} className={`${showInfoCard ? 'block' : 'hidden'} transition-all`} />
       {CONFIG.WIDGET_ANALYTICS && <AnalyticsCard {...props} />}
 
       {showCategory && (
@@ -60,15 +61,15 @@ export default function SideRight(props) {
         </Card>
       )}
       {CONFIG.WIDGET_LATEST_POSTS && latestPosts && latestPosts.length > 0 && <Card>
-        <LatestPostsGroup {...props} />
+        <LatestPostsGroup {...props} className={`${showLatest ? 'block' : 'hidden'} transition-all`} />
       </Card>}
 
-      <Announcement post={notice}/>
+      <Announcement post={notice} className={`${showNotice ? 'block' : 'hidden'} transition-all`} />
 
       {BLOG.COMMENT_WALINE_SERVER_URL && BLOG.COMMENT_WALINE_RECENT && <HexoRecentComments/>}
 
       <div className='sticky top-20'>
-        {post && post.toc && post.toc.length > 1 && BLOG.HEXO_THEME_NAV_MENU_LAYOUT === 'right' && <Card>
+        {post && post.toc && post.toc.length > 1 && <Card>
           <Catalog toc={post.toc} />
         </Card>}
 

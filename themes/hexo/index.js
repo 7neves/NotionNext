@@ -4,7 +4,6 @@ import CommonHead from '@/components/CommonHead'
 import { useEffect, useRef } from 'react'
 import Footer from './components/Footer'
 import SideRight from './components/SideRight'
-import Catalog from './components/Catalog';
 import TopNav from './components/TopNav'
 import { useGlobal } from '@/lib/global'
 import BLOG from '@/blog.config'
@@ -42,7 +41,7 @@ import replaceSearchResult from '@/components/Mark'
  * @constructor
  */
 const LayoutBase = props => {
-  const { children, headerSlot, floatSlot, slotTop, meta, siteInfo, className, post } = props
+  const { children, headerSlot, floatSlot, slotTop, meta, siteInfo, className } = props
   const { onLoading } = useGlobal()
 
   return (
@@ -72,13 +71,6 @@ const LayoutBase = props => {
       {/* 主区块 */}
       <main id="wrapper" className={`${CONFIG.HOME_BANNER_ENABLE ? '' : 'pt-16'} bg-hexo-background-gray dark:bg-black w-full py-8 md:px-8 lg:px-24 min-h-screen relative`}>
         <div id="container-inner" className={(BLOG.LAYOUT_SIDEBAR_REVERSE ? 'flex-row-reverse' : '') + ' w-full mx-auto lg:flex lg:space-x-4 justify-center relative z-10'} >
-          {post && post.toc && post.toc.length > 1 && BLOG.HEXO_THEME_NAV_MENU_LAYOUT === 'left' && (
-            <div className='overflow-visible hidden lg:block'>
-              <Card className='sticky top-20'>
-                <Catalog toc={post.toc} />
-              </Card>
-            </div>
-          )}
           <div className={`${className || ''} w-full max-w-4xl h-full overflow-hidden`}>
 
             <Transition
@@ -213,7 +205,7 @@ const LayoutSlug = props => {
   </>
 
   return (
-    <LayoutBase {...props} headerSlot={<PostHeader {...props} />} showCategory={false} showTag={false} floatSlot={floatSlot} >
+    <LayoutBase {...props} headerSlot={<PostHeader {...props} />} showCategory={false} showTag={false} showNotice={false} showLatest={false} showInfoCard={false} floatSlot={floatSlot} >
       <div className="w-full lg:hover:shadow lg:border rounded-t-xl lg:rounded-xl lg:px-2 lg:py-4 bg-white dark:bg-hexo-black-gray dark:border-black article">
         {lock && <ArticleLock validPassword={validPassword} />}
 
