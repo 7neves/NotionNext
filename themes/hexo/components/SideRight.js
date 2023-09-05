@@ -68,7 +68,7 @@ export default function SideRight(props) {
       {BLOG.COMMENT_WALINE_SERVER_URL && BLOG.COMMENT_WALINE_RECENT && <HexoRecentComments/>}
 
       <div className='sticky top-20'>
-        {post && post.toc && post.toc.length > 1 && <Card>
+        {post && post.toc && post.toc.length > 1 && BLOG.HEXO_THEME_NAV_MENU_LAYOUT === 'right' && <Card>
           <Catalog toc={post.toc} />
         </Card>}
 

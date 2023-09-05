@@ -15,7 +15,7 @@ const Progress = ({ targetRef, showPercent = true }) => {
       const clientHeight = target.clientHeight
       const scrollY = window.pageYOffset
       const fullHeight = clientHeight - window.outerHeight
-      let per = parseFloat(((scrollY / fullHeight) * 100).toFixed(0))
+      let per = parseFloat((((scrollY - 384) / fullHeight) * 100).toFixed(0))
       if (per > 100) per = 100
       if (per < 0) per = 0
       changePercent(per)
